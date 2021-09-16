@@ -10,6 +10,7 @@ npm install vue@next
 npm install vue-router@next
 npm install vue-loader@next
 npm install vue-template-compiler
+npm install vuex@next --save
 npm install -D sass-loader node-sass
 npm install sass resolve-url-loader@^3.1.2 @vue/compiler-sfc --save-dev --legacy-peer-deps
 ```
