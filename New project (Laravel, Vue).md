@@ -17,9 +17,15 @@ npm install sass resolve-url-loader@^3.1.2 @vue/compiler-sfc --save-dev --legacy
 
 ## webpack.mix.js
 ```javascript
+const mix = require('laravel-mix');
+
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .vue();
+
+if (mix.inProduction()) {
+    mix.version();
+}
 ```
 
 ## resources/views/app.blade.php
@@ -134,4 +140,11 @@ export const store = createStore({
 ## config/app.php
 ```text
 'locale' => env('APP_LOCALE', 'ru'),
+```
+
+## .gitignore
+```text
+/public/css
+/public/js
+/public/storage
 ```
