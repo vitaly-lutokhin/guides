@@ -28,6 +28,7 @@ sudo gitlab-runner register
 
 9. Gitlab-runner будет Вам задавать вопросы. Отвечаем также как представлено на скриншоте;
 
+
 10. Верификация всех gitlab-runner;
 sudo gitlab-runner verify
 
