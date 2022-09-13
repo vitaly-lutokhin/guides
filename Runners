@@ -1,0 +1,54 @@
+1. Заходим в гитлаб. Выбираем нужный проект. Заходим в раздел Settings -> CI/CD -> Runners -> Expand;
+
+2. После перехода в страницу Runners находим url и token и оставляем открытую вкладку. Она нам еще пригодится;
+
+3. Заходим на сервер, где развернут проект. Я подключаюсь по ssh;
+
+4. Если выполняется первая установка gitlab-runner на сервере, то его необходимо установить. Добавляем gitlab репозиторий: 
+# For Debian/Ubuntu/Mint
+curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | sudo bash
+
+# For RHEL/CentOS/Fedora
+curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh" | sudo bash
+
+5.Устанавливаем последнюю версию GitLab Runner;
+# For Debian/Ubuntu/Mint
+export GITLAB_RUNNER_DISABLE_SKEL=true; sudo -E apt-get install gitlab-runner
+
+# For RHEL/CentOS/Fedora
+export GITLAB_RUNNER_DISABLE_SKEL=true; sudo -E yum install gitlab-runner
+
+6. Проверяем установленный gitlab-runner;
+gitlab-runner -v
+
+7. Регистрируем gitlab-runner;
+sudo gitlab-runner register
+
+8. Открываем свернутую вкладку в браузере (CI/CD). Копируем URL и token;
+
+9. Gitlab-runner будет Вам задавать вопросы. Отвечаем также как представлено на скриншоте;
+
+10. Верификация всех gitlab-runner;
+sudo gitlab-runner verify
+
+11. Проверяем синхронизированный gitlab-runner в gitlab settings в браузере. Обновляем страницу;
+
+12. Я включал gitlab-runner только для защищенных веток (dev, master) и отключал выполнение runner по тегам (тег dps). Вы можете запустить runner для всех веток;
+
+13. Выставляем все так же как на скриншоте и нажимаем на кнопку “Save changes”;
+
+
+14. Загружаем файл .gitlab-ci в git (можно через любую IDE или через GitLab Web). В файле описаны основные действия для автосборки проекта. Покажу пример создания .gitlab-ci через GitLab Web. Нажимаем на кнопку “Set up CI/CD”;
+
+15. Добавляем скрипт (проверяем этот скрипт и меняем пути на свои: /var/www/путь к проекту и проверяем выполнение команд. У Вас могут быть совсем другие команды). Пример .gitlab-ci.yml можно скачать по ссылке: https://mega.nz/folder/ZRoW2RzS#YmeoJcj1K_o116FyF_98Yw; Название файла “.gitlab-ci.yml”
+
+16. Проверяем защищенные ветки (Project->Settings->Repository);
+
+17. После выполнения всех пунктов у Вас должен заработать Pipeline;
+
+
+PS: Путь сохранённых runner’ов:
+/etc/gitlab-runner/config.toml
+
+Удаление нерабочих runner’ов
+gitlab-runner verify --delete
