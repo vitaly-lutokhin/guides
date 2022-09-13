@@ -27,7 +27,12 @@ sudo gitlab-runner register
 8. Открываем свернутую вкладку в браузере (CI/CD). Копируем URL и token;
 
 9. Gitlab-runner будет Вам задавать вопросы. Отвечаем также как представлено на скриншоте;
-
+Enter the GitLab instance URL (for example, https://gitlab.com/):https://gitlab.com/
+Enter the registration token: GR1348941jXr4vzNA6GiyCBdtKChK
+Enter a description for the runner: [ubuntu]: VueLanding
+Enter tags for the runner (comma-separated): vuelanding
+Enter optional maintenance note for the runner: (Информация о железе. Можно оставить пустым)
+Enter an executor: shell
 
 10. Верификация всех gitlab-runner;
 sudo gitlab-runner verify
