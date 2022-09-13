@@ -41,7 +41,29 @@ sudo gitlab-runner verify
 
 12. В окне редактирования ранера выбираем все галочки
 
-13. Загружаем файл .gitlab-ci в git (можно через любую IDE или через GitLab Web). В файле описаны основные действия для автосборки проекта. Покажу пример создания .gitlab-ci через GitLab Web. Нажимаем на кнопку “Set up CI/CD”;
+13. Загружаем файл .gitlab-ci в git (можно через любую IDE или через GitLab Web). В файле описаны основные действия для автосборки проекта. Пример содержимого файла”;
+
+before_script:
+  - echo "Before script"
+  - echo $CI_PROJECT_DIR
+  - rm -Rf $CI_PROJECT_DIR/.git
+  - cp -r -u $CI_PROJECT_DIR/. /var/www/vuelanding
+  - cd /var/www/vuelanding
+building:
+  stage: build
+  only:
+    - dev
+  script:
+    - npm install
+    - npm run build
+deploying:
+  stage: deploy
+  only:
+    - dev
+  script:
+    - echo "Deployed"
+    
+ВНИМНИЕ! БУДЕР РАБОТАТЬ ТОЛЬКО ДЛЯ ВЕТКИ dev
 
 14. Добавляем скрипт (проверяем этот скрипт и меняем пути на свои: /var/www/путь к проекту и проверяем выполнение команд. У Вас могут быть совсем другие команды). Пример .gitlab-ci.yml можно скачать по ссылке: https://mega.nz/folder/ZRoW2RzS#YmeoJcj1K_o116FyF_98Yw; Название файла “.gitlab-ci.yml”
 
